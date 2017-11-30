@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Admin Privilege module.
+ *
+ * If a node is owned by a user with the administator role
+ * this denies update and delete access to users without it.
+ */
+
+/**
+ * Implements hook_node_access().
+ */
+function glenn_admin_privilege_node_access($node, $op, $account) {
+  // I'm not sure when $node would be a string, but it's in
+  // the example: https://api.drupal.org/comment/51978#comment-51978
+  if (is_string($node)) {
+    return NODE_ACCESS_IGNORE;
+  }
+
+  // If $op is updating or deleting trigger access checks on article nodes.
+  if ($op == 'update' || $op == 'delete') {
+    // If the node author is an admin deny from all except admins.
+    // Check if the node author has the administrator (rid=3) role.
+    if (user_has_role('3', user_load($node->uid))) {
+      // Check to see if user has admin role.
+      if (user_has_role('3')) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}

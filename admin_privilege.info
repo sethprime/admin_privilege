@@ -1,0 +1,5 @@
+name = "Glenn: Admin Privilege"
+description = "Custom module for Glenn County Admin Access module."
+core = "7.x"
+package = "Glenn"
+dependencies[] = glenn
