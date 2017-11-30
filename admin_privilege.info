@@ -1,5 +1,4 @@
-name = "Glenn: Admin Privilege"
-description = "Custom module for Glenn County Admin Access module."
+name = "Admin Privilege"
+description = "Protects admin owned nodes from being modified by non-admins."
 core = "7.x"
-package = "Glenn"
-dependencies[] = glenn
+package = "Access control"
